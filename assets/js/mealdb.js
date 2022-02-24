@@ -27,7 +27,7 @@ const displaySearchResult=meals=>{
 
                 div.classList.add('col')
 
-                div.innerHTML=`  <div class="card h-100">
+                div.innerHTML=`<div onclick="loadMealDetails(${meal.idMeal})" class="card h-100">
                 <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">${meal.strMeal}</h5>
@@ -41,4 +41,37 @@ const displaySearchResult=meals=>{
         // for(const meal of meals){
         //         console.log(meal[0])
         // }
+}
+
+
+const loadMealDetails=mealId=>{
+        console.log(mealId)
+
+        const url=`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
+
+        fetch(url)
+        .then(res=>res.json())
+        .then(data=>displayMealDetail(data.meals[0]))
+}
+
+
+const displayMealDetail=meal=>{
+        console.log(meal);
+
+        const mealDetails=document.getElementById('meal-details')
+
+        const div=document.createElement('div');
+        div.classList.add('card');
+        div.classList.add('mb-3');
+
+        div.innerHTML=`
+        <img src="${meal.strMealThumb}" class="card-img-top img-fluid" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${meal.strMeal}</h5>
+          <p class="card-text">${meal.strInstructions}</p>
+          <a class="btn btn-primary" href="${meal.strYoutube}">view vido</a>
+        </div>`
+
+        mealDetails.appendChild(div);
+
 }
