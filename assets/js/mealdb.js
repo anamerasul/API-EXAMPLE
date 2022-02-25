@@ -1,6 +1,10 @@
+document.getElementById('error-message').style.display='none';
+
 const searchFood=()=>{
         const searchField=document.getElementById('search-input');
         const searchFieldtxt=searchField.value;
+
+        document.getElementById('error-message').style.display='none';
         console.log(searchFieldtxt);
 
         searchField.value='';
@@ -18,8 +22,14 @@ const searchFood=()=>{
         fetch(url)
         .then(res=>res.json())
         .then(data=>displaySearchResult(data.meals))
+        .catch(error=>displayerr(error))
+        
+        }    
+        
+}
 
-        }
+const displayerr=()=>{
+        document.getElementById('error-message').style.display='block';
 }
 
 const displaySearchResult=meals=>{

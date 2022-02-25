@@ -1,3 +1,4 @@
+document.getElementById('error-message').style.display='none';
 const searchFood=async ()=>{
         const searchField=document.getElementById('search-input');
         const searchFieldtxt=searchField.value;
@@ -11,18 +12,27 @@ const searchFood=async ()=>{
 
         else{
         // load data
-        const url=`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchFieldtxt}`
+        const url=`https://www.themealdb.com/api/json/v11/1/search.php?s=${searchFieldtxt}`
 
         console.log(url)
 
         // fetch(url)
         // .then(res=>res.json())
         // .then(data=>displaySearchResult(data.meals))\
-
+try{
         const res =await fetch(url);
 
         const data=await res.json();
         displaySearchResult(data.meals)
+
+}
+catch(error){
+
+        console.log(error)
+
+        document.getElementById('error-message').style.display='block';
+}
+    
         }
 }
 
