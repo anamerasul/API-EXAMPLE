@@ -12,7 +12,7 @@ const searchFood=async ()=>{
 
         else{
         // load data
-        const url=`https://www.themealdb.com/api/json/v11/1/search.php?s=${searchFieldtxt}`
+        const url=`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchFieldtxt}`
 
         console.log(url)
 
